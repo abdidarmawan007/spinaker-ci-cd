@@ -1,0 +1,82 @@
+### Config Deployment Admin Dashboard ( use replicaset for blue/green deployment spinnaker)###
+apiVersion: v1
+kind: Service
+metadata:
+  name: $GKE_DEPLOYMENT_NAME
+  labels:
+    app: $GKE_DEPLOYMENT_NAME
+spec:
+  selector:
+    app: $GKE_DEPLOYMENT_NAME
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  #name: stag-cms
+  annotations:
+    strategy.spinnaker.io/max-version-history: '2'
+    traffic.spinnaker.io/load-balancers: '["service $GKE_DEPLOYMENT_NAME"]'
+  labels:
+    tier: $GKE_DEPLOYMENT_NAME
+  name: $GKE_DEPLOYMENT_NAME
+spec:
+  replicas: $GKE_POD_MINIMUM_REPLICAS
+  selector:
+    matchLabels:
+      tier: $GKE_DEPLOYMENT_NAME
+  template:
+    metadata:
+      labels:
+        tier: $GKE_DEPLOYMENT_NAME
+        #env: staging # NOTE: Set it with teamcity variable
+    spec:
+      containers:
+      - name: $GKE_DEPLOYMENT_NAME
+        #image: $GKE_REGISTRY_REGION/$GKE_PROJECT_ID/$GKE_REGISTRY_NAME:$GKE_CONTAINER_TAG  ## NOTE: variable envsubst for teamcity in url registry adn tag
+        #image: 'asia.gcr.io/collection-rc-staging-00/cms-staging:CMS-667-1-889'
+        image: "gcr.io/google-samples/hello-app:2.0"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources:
+            limits:
+               cpu: "$GKE_POD_CPU"
+               memory: "$GKE_POD_MEMORY"
+        # health checks self healing check port 80 response 200,
+        # if containers error (400-500) kubernetes restart the pod
+        # NOTE: this config health check will use by ingress
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 15
+          timeoutSeconds: 6
+          periodSeconds: 10
+        livenessProbe:
+           httpGet:
+             path: /
+             port: 80
+           initialDelaySeconds: 15
+           timeoutSeconds: 6
+           periodSeconds: 10
+---
+### Config Autoscale ###
+# NOTE: Config Autoscale pods deployment
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name:  $GKE_DEPLOYMENT_NAME # NOTE: Set it with teamcity variable
+#  namespace: default
+spec:
+  maxReplicas: 25
+  minReplicas: $GKE_POD_MINIMUM_REPLICAS
+  scaleTargetRef:
+    apiVersion: extensions/v1
+    kind: ReplicaSet
+    name:  $GKE_DEPLOYMENT_NAME # NOTE: Set it with teamcity variable
+  targetCPUUtilizationPercentage: 70
