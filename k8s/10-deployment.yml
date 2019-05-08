@@ -39,7 +39,7 @@ spec:
       - name: $GKE_DEPLOYMENT_NAME
         #image: $GKE_REGISTRY_REGION/$GKE_PROJECT_ID/$GKE_REGISTRY_NAME:$GKE_CONTAINER_TAG  ## NOTE: variable envsubst for teamcity in url registry adn tag
         #image: 'asia.gcr.io/collection-rc-staging-00/cms-staging:CMS-667-1-889'
-        image: "gcr.io/google-samples/hello-app:2.0"
+        image: "$GCP_REGISTRY_REGION/google-samples/hello-app:2.0"
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
