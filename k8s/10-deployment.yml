@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: $GKE_DEPLOYMENT_NAME
-        image: "$GKE_REGISTRY_REGION/$GKE_PROJECT_ID/$GKE_DEPLOYMENT_NAME:2.0"
+        image: "$GKE_REGISTRY_REGION/$GKE_PROJECT_ID/$GKE_DEPLOYMENT_NAME:$GKE_BRANCH"
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
