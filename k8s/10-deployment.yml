@@ -50,14 +50,14 @@ spec:
         # NOTE: this config health check will use by ingress
         readinessProbe:
           httpGet:
-            path: /
+            path: $GKE_POD_HEALTHCHECK
             port: 8080
           initialDelaySeconds: 15
           timeoutSeconds: 6
           periodSeconds: 10
         livenessProbe:
            httpGet:
-             path: /
+             path: $GKE_POD_HEALTHCHECK
              port: 8080
            initialDelaySeconds: 15
            timeoutSeconds: 6
