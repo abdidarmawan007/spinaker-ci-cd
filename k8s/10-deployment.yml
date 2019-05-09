@@ -33,7 +33,7 @@ spec:
     metadata:
       labels:
         tier: $GKE_DEPLOYMENT_NAME
-        #env: staging # NOTE: Set it with teamcity variable
+        #env: staging
     spec:
       containers:
       - name: $GKE_DEPLOYMENT_NAME
@@ -45,7 +45,7 @@ spec:
             limits:
                cpu: "$GKE_POD_CPU"
                memory: "$GKE_POD_MEMORY"
-        # health checks self healing check port 80 response 200,
+        # health checks self healing check port 8080 response 200,
         # if containers error (400-500) kubernetes restart the pod
         # NOTE: this config health check will use by ingress
         readinessProbe:
@@ -68,7 +68,7 @@ spec:
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name:  $GKE_DEPLOYMENT_NAME # NOTE: Set it with teamcity variable
+  name:  $GKE_DEPLOYMENT_NAME
 #  namespace: default
 spec:
   maxReplicas: 25
@@ -76,5 +76,5 @@ spec:
   scaleTargetRef:
     apiVersion: extensions/v1
     kind: ReplicaSet
-    name:  $GKE_DEPLOYMENT_NAME # NOTE: Set it with teamcity variable
+    name:  $GKE_DEPLOYMENT_NAME
   targetCPUUtilizationPercentage: 70
