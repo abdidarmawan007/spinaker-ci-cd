@@ -14,6 +14,16 @@ pipeline {
 docker build -t $GCP_REGISTRY_REGION/$GCP_PROJECT_ID/$DEPLOYMENT_NAME:$BRANCH-$BUILD_NUMBER -f Dockerfile .'''
       }
     }
+    stage('push docker image') {
+      steps {
+        sh '''#!/bin/bash -ex
+## push docker image to gcr ##
+
+gcloud auth configure-docker
+
+docker push $GCP_REGISTRY_REGION/$GCP_PROJECT_ID/$DEPLOYMENT_NAME:$BRANCH-$BUILD_NUMBER'''
+      }
+    }
   }
   environment {
     BRANCH = 'develop'
