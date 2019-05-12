@@ -1,7 +1,7 @@
 node ('jenkins-worker') {
    stage('pull scm git') {
       // Get some code from a GitHub repository
-      git branch: 'develop', credentialsId: 'abdi', url: 'git@github.com:abdidarmawan007/docker-golang.git'
+      git branch: '$BRANCH', credentialsId: 'abdi', url: 'git@github.com:abdidarmawan007/docker-golang.git'
    }
    stage('build docker image') {
       // Run build
@@ -26,6 +26,6 @@ node ('jenkins-worker') {
    }
    stage('upload manifest k8s to gcs') {
       // Run build
-         sh 'gsutil cp k8s/deployment.yml gs://abdi-zeus-k8s/'
+         sh 'gsutil cp k8s/deployment.yml gs://zeus-k8s-manifest/$DEPLOYMENT_NAME/'
    }
 }
