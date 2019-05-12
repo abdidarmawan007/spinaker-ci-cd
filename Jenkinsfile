@@ -26,6 +26,6 @@ node ('jenkins-worker') {
    }
    stage('upload manifest k8s to gcs') {
       // Run build
-         sh 'gsutil cp k8s/deployment.yml gs://abdi-zeus-k8s/'
+         sh 'gsutil cp k8s/deployment.yml gs://zeus-k8s-manifest/$DEPLOYMENT_NAME/'
    }
 }
