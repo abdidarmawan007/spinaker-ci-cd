@@ -25,7 +25,7 @@ node ('jenkins-worker') {
              envsubst < k8s/10-deployment.yml > k8s/deployment.yml'''
    }
    stage('upload manifest k8s to gcs') {
-      // Run build
-         sh 'gsutil cp k8s/deployment.yml gs://zeus-k8s-manifest/$DEPLOYMENT_NAME/'
+      // Run build (folder gcs autumated create with command "gsutil cp -r")
+         sh 'gsutil cp -r k8s/deployment.yml gs://zeus-k8s-manifest/$DEPLOYMENT_NAME/'
    }
 }
