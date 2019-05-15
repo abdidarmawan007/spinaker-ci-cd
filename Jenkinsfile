@@ -1,7 +1,6 @@
 node ('jenkins-worker') {
-   stage('pull scm git') {
-      // Get some code from a GitHub repository
-      git credentialsId: 'abdi', url: 'git@github.com:abdidarmawan007/docker-golang.git'
+   stage("Checkout") {
+        checkout scm
    }
    stage('build docker image') {
       // Run build
