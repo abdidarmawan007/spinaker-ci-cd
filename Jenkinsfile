@@ -1,10 +1,10 @@
 node ('jenkins-worker') {
    stage('Checkout') {
         checkout scm
+        sh 'git status'
    }
    stage('build docker image') {
       // Run build
-         sh 'git status'
          sh 'docker build -t $GCP_REGISTRY_REGION/$GCP_PROJECT_ID/$DEPLOYMENT_NAME:$BRANCH-$BUILD_NUMBER -f Dockerfile .'
    }
    stage('push docker image to gcr') {
