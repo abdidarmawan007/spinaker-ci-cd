@@ -1,5 +1,5 @@
 node ('jenkins-worker') {
-   stage("Checkout") {
+   stage('Checkout') {
         checkout scm
    }
    stage('build docker image') {
