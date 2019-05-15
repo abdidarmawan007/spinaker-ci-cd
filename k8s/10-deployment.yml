@@ -1,4 +1,4 @@
-### Config Deployment Admin Dashboard ( use replicaset for blue/green deployment spinnaker)###
+### Config Deployment ( use replicaset for blue/green deployment spinnaker)###
 apiVersion: v1
 kind: Service
 metadata:
