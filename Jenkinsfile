@@ -1,5 +1,6 @@
 node ('jenkins-worker') {
    stage('Checkout') {
+      // Run clean dir and checkout scm
         deleteDir()
         checkout scm
         sh 'git status'
