@@ -12,7 +12,7 @@ spec:
   - port: 80
     targetPort: 8080
     protocol: TCP
-type: LoadBalancer
+  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: ReplicaSet
@@ -68,7 +68,7 @@ spec:
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name:  $GKE_DEPLOYMENT_NAME
+  name: $GKE_DEPLOYMENT_NAME
 #  namespace: default
 spec:
   maxReplicas: 25
@@ -76,5 +76,5 @@ spec:
   scaleTargetRef:
     apiVersion: extensions/v1
     kind: ReplicaSet
-    name:  $GKE_DEPLOYMENT_NAME
+    name: $GKE_DEPLOYMENT_NAME
   targetCPUUtilizationPercentage: 70
