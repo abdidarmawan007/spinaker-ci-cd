@@ -3,7 +3,7 @@ docker golang with k8s config for testing autobuild with CI Jenkins and autodepl
 ## CI declarative Jenkinsfile pipeline
 automated build docker images with CI Jenkins pipeline
 ![alt text](https://i.imgur.com/Rz9Ka5O.png)
-## CD Spinnaker pipeline(GKE)
+## CD Spinnaker pipeline (GKE)
 automated deployment with CD Spinnaker
 - blue/green deployment
 - native support GKE
