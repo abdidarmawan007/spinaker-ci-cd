@@ -17,6 +17,7 @@ node ('jenkins-worker') {
    stage('config env manifest k8s') {
       // run build
       sh '''GKE_DEPLOYMENT_NAME=$DEPLOYMENT_NAME \\
+         GKE_DEPLOYMENT_ENV=$DEPLOYMENT_ENV \\
          GKE_POD_CPU=$POD_CPU \\
          GKE_POD_MEMORY=$POD_MEMORY \\
          GKE_POD_MINIMUM_REPLICAS=$POD_MINIMUM_REPLICAS \\
