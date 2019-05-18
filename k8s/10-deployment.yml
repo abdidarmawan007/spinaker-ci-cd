@@ -33,7 +33,7 @@ spec:
     metadata:
       labels:
         tier: $GKE_DEPLOYMENT_NAME
-        #env: staging
+        env: develop
     spec:
       terminationGracePeriodSeconds: 30
       containers:
