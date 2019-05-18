@@ -72,10 +72,10 @@ metadata:
   name: $GKE_DEPLOYMENT_NAME
 #  namespace: default
 spec:
-  maxReplicas: 25
+  maxReplicas: 30
   minReplicas: $GKE_POD_MINIMUM_REPLICAS
   scaleTargetRef:
     apiVersion: extensions/v1
     kind: ReplicaSet
     name: $GKE_DEPLOYMENT_NAME
-  targetCPUUtilizationPercentage: 80
+  targetCPUUtilizationPercentage: 70
