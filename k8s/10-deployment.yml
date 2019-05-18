@@ -35,6 +35,7 @@ spec:
         tier: $GKE_DEPLOYMENT_NAME
         #env: staging
     spec:
+      terminationGracePeriodSeconds: 60
       containers:
       - name: $GKE_DEPLOYMENT_NAME
         image: "$GKE_REGISTRY_REGION/$GKE_PROJECT_ID/$GKE_DEPLOYMENT_NAME:$GKE_BRANCH"
