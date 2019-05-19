@@ -7,7 +7,10 @@ automated build (pull request) docker images with CI Jenkins pipeline
 automated deployment with CD Spinnaker
 - blue/green deployment
 - native support GKE
+
 ![alt text](https://i.imgur.com/s7T02x7.png)
 ![alt text](https://i.imgur.com/pwVpVVX.png)
+
 - instant rollback in production
+
 ![alt text](https://i.imgur.com/eU5CYZh.png)
