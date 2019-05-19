@@ -38,7 +38,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: $GKE_DEPLOYMENT_NAME
-        image: "$GKE_REGISTRY_REGION/$GKE_PROJECT_ID/$GKE_DEPLOYMENT_NAME" #docker tag automated inject by spinnker
+        image: "$GKE_REGISTRY_REGION/$GKE_PROJECT_ID/$GKE_DEPLOYMENT_NAME" # docker tag automated inject by spinnaker
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
