@@ -12,7 +12,7 @@ node ('jenkins-worker') {
    stage('push docker image to gcr') {
       // run build
       sh 'gcloud auth configure-docker'
-      sh 'docker push $GCP_REGISTRY_REGION/$GCP_PROJECT_ID/$DEPLOYMENT_NAME:$BRANCH-$BUILD_NUMBER'
+      sh 'docker push $GCP_REGISTRY_REGION/$GCP_PROJECT_ID/$DEPLOYMENT_NAME'
    }
    stage('config env manifest k8s') {
       // run build
