@@ -24,7 +24,6 @@ node ('jenkins-worker') {
          GKE_POD_HEALTHCHECK=$POD_HEALTHCHECK \\
          GKE_REGISTRY_REGION=$GCP_REGISTRY_REGION \\
          GKE_PROJECT_ID=$GCP_PROJECT_ID \\
-         GKE_BRANCH=$BRANCH-$BUILD_NUMBER \\
          envsubst < k8s/10-deployment.yml > k8s/deployment.yml'''
    }
    stage('upload manifest k8s to gcs') {
