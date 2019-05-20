@@ -1,4 +1,4 @@
-## docker golang alpine linux  ##
+## docker golang alpine linux a ##
 
 FROM golang:1.8-alpine
 ADD . /go/src/hello-app
