@@ -14,3 +14,8 @@ automated deployment with CD Spinnaker
 - instant rollback in production
 
 ![alt text](https://i.imgur.com/eU5CYZh.png)
+
+- node pools selector
+
+![alt text](https://i.imgur.com/a03cIdn.png)
+![alt text](https://i.imgur.com/f98esHR.png)
