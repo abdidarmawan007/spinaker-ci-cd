@@ -17,10 +17,9 @@ spec:
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  #name: stag-cms
   annotations:
-    strategy.spinnaker.io/max-version-history: '2'
-    traffic.spinnaker.io/load-balancers: '["service $GKE_DEPLOYMENT_NAME"]'
+    strategy.spinnaker.io/max-version-history: '2' # config max history deployment in spinnaker
+    traffic.spinnaker.io/load-balancers: '["service $GKE_DEPLOYMENT_NAME"]' # config spinnaker blue/green deployment
   labels:
     tier: $GKE_DEPLOYMENT_NAME
   name: $GKE_DEPLOYMENT_NAME
@@ -37,7 +36,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 30
       nodeSelector:
-        cloud.google.com/gke-nodepool: $GKE_POD_POOL_NODE
+        cloud.google.com/gke-nodepool: $GKE_POD_POOL_NODE # config node-pools selector 
       containers:
       - name: $GKE_DEPLOYMENT_NAME
         image: "$GKE_REGISTRY_REGION/$GKE_PROJECT_ID/$GKE_DEPLOYMENT_NAME" # docker tag automated inject by spinnaker
