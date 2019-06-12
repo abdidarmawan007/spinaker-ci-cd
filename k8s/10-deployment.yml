@@ -36,6 +36,8 @@ spec:
         env: $GKE_DEPLOYMENT_ENV
     spec:
       terminationGracePeriodSeconds: 30
+      nodeSelector:
+        cloud.google.com/gke-nodepool: $GKE_POD_POOL_NODE
       containers:
       - name: $GKE_DEPLOYMENT_NAME
         image: "$GKE_REGISTRY_REGION/$GKE_PROJECT_ID/$GKE_DEPLOYMENT_NAME" # docker tag automated inject by spinnaker
@@ -45,10 +47,7 @@ spec:
         resources:
             limits:
                cpu: "$GKE_POD_CPU"
-               memory: "$GKE_POD_MEMORY"
-      nodeSelector:
-        app: $GKE_DEPLOYMENT_NAME
-        cloud.google.com/gke-nodepool: $GKE_POD_POOL_NODE         
+               memory: "$GKE_POD_MEMORY"         
         # health checks self healing check port 8080 response 200,
         # if containers error (400-500) kubernetes restart the pod
         # NOTE: this config health check will use by ingress
