@@ -47,6 +47,7 @@ spec:
                cpu: "$GKE_POD_CPU"
                memory: "$GKE_POD_MEMORY"
       nodeSelector:
+        app: $GKE_DEPLOYMENT_NAME
         cloud.google.com/gke-nodepool: $GKE_POD_POOL_NODE         
         # health checks self healing check port 8080 response 200,
         # if containers error (400-500) kubernetes restart the pod
