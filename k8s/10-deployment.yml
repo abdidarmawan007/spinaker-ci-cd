@@ -48,9 +48,7 @@ spec:
             limits:
                cpu: "$GKE_POD_CPU"
                memory: "$GKE_POD_MEMORY"         
-        # health checks self healing check port 8080 response 200,
-        # if containers error (400-500) kubernetes restart the pod
-        # NOTE: this config health check will use by ingress
+        # health checks self healing check port 8080 response 200
         readinessProbe:
           httpGet:
             path: $GKE_POD_HEALTHCHECK
