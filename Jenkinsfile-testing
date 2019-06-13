@@ -1,0 +1,50 @@
+// use node/worker build with label jenkins-worker and send slack notif if build start
+node ('jenkins-worker') {
+   try {
+        notifySlack()
+
+   stage('Checkout') {
+      // run clean dir and checkout scm
+      deleteDir()
+      checkout scm
+      sh 'git status'
+   }
+   stage('test code') {
+      // run build
+      sh 'ls'
+   }
+   stage('test code 2') {
+      // run build
+      sh 'ls'
+   }
+
+
+// CONFIG SLACK NOTIF !
+} catch (e) {
+        currentBuild.result = 'FAILURE'
+        throw e
+    } finally {
+        notifySlack(currentBuild.result)
+    }
+}
+
+def notifySlack(String buildStatus = 'STARTED') {
+    // Build status of null means success.
+    buildStatus = buildStatus ?: 'SUCCESS'
+
+    def color
+
+    if (buildStatus == 'STARTED') {
+        color = '#D4DADF'
+    } else if (buildStatus == 'SUCCESS') {
+        color = '#00FF00'
+    } else if (buildStatus == 'UNSTABLE') {
+        color = '#fffd00'
+    } else {
+        color = '#FF0000'
+    }
+
+    def msg = "${buildStatus}: `${env.JOB_NAME}` #${env.BUILD_NUMBER} \n BUILD URL: ${env.BUILD_URL}"
+
+    slackSend(color: color, message: msg)
+}
