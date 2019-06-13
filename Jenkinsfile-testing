@@ -11,7 +11,7 @@ node ('jenkins-worker') {
    }
    stage('test code') {
       // run build
-      sh 'ls -la'
+      sh 'docker build -t $GCP_REGISTRY_REGION/$GCP_PROJECT_ID'
    }
    stage('test code 2') {
       // run build
