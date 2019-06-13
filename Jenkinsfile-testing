@@ -15,7 +15,7 @@ node ('jenkins-worker') {
    }
    stage('test code 2') {
       // run build
-      sh 'ls'
+      sh 'ls -la'
    }
 
 
