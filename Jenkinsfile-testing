@@ -11,11 +11,11 @@ node ('jenkins-worker') {
    }
    stage('test code') {
       // run build
-      sh 'ls -la'
+      sh 'ls'
    }
    stage('test code 2') {
       // run build
-      sh 'ls -la'
+      sh 'ls'
    }
 
 
